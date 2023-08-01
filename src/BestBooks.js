@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./BestBooks.css";
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class BestBooks extends React.Component {
       books: []
     }
   }
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
+
   componentDidMount() {
     fetch("http://localhost:3001/books")
     .then(response => response.json())
@@ -18,27 +19,26 @@ class BestBooks extends React.Component {
   }
 
   render() {
-/* TODO: render all the books in a Carousel */
-    
 
     return (
-      <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-      
-        {this.state.books.length > 0 ?  (
-          <Carousel>
+      <div className="best-books-container">
+        <h2 className="title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
+
+        {this.state.books.length > 0 ? (
+          <Carousel className="book-carousel">
             {this.state.books.map((book, index) => (
-            <div key={index}>
-              <h2>{book.title}</h2>
-              <p>{book.author}</p>
+            <div key={index} className="book-card">
+              <img src={book.coverImageUrl} alt={book.title} className="book-cover"></img>
+              <h2 className="book-title">{book.title}</h2>
+              <p className="book-author">{book.author}</p>
             </div>
-          ))}
+            ))}
           </Carousel>
           ) : (
-            <h3>"No Books Found :</h3>
+            <h3 className="no-books-found">"No Books Found :</h3>
           )
         }
-      </>
+      </div>
     )
   }
 }
