@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -12,9 +6,8 @@ import About from "./About";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
-  Routes,
   Route,
-  Switch,
+  Routes,
   Link
 } from "react-router-dom";
 import { Nav } from 'react-bootstrap';
@@ -24,25 +17,16 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <nav>
-            <ul>
-              <li><link to="/">Home</link></li>
-              <li><link to="/about">About</link></li>
-            </ul>
-          </nav>
+          <Header />
+          <Nav>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+          </Nav>
 
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/">
-                <BestBooks />
-            </Route>
-            <Route 
-              exact path="/About.js"
-              element={<About />}
-            >
-            </Route>
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<BestBooks />} />
+          </Routes>
       
           <Footer />
         </Router>
