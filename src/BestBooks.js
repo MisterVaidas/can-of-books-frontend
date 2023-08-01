@@ -27,16 +27,17 @@ class BestBooks extends React.Component {
       
         {this.state.books.length > 0 ?  (
           <Carousel>
-          {this.state.books.map((book, index) => (
-         <div key={index}>
-          <h2>{book.title}</h2>
-          <p>{book.author}</p>
-         </div>
-            ))}
-            </Carousel>
-        ) : (
-          <h3>"No Books Found :</h3>
-        )}
+            {this.state.books.map((book, index) => (
+            <div key={index}>
+              <h2>{book.title}</h2>
+              <p>{book.author}</p>
+            </div>
+          ))}
+          </Carousel>
+          ) : (
+            <h3>"No Books Found :</h3>
+          )
+        }
       </>
     )
   }
