@@ -1,0 +1,53 @@
+.best-books-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.book-carousel {
+  margin-top: 50px;
+}
+
+.book-card {
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.book-card:hover {
+  box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+}
+
+.book-cover {
+  width: 75%;
+  height: 75%;
+}
+
+.book-title {
+  font-size: 1.2em;
+  margin: 20px 0 10px 0;
+  color: #333;
+}
+
+.book-author {
+  font-size: 1em;
+  color: #777;
+}
+
+.no-books-found {
+  color: #999;
+}
+
+.carousel .slide img {
+  width: 50%;
+  vertical-align: top;
+  border: 0;
+}
