@@ -71,7 +71,7 @@ class BestBooks extends React.Component {
           </label>
           <label>
             Availability:
-          <input type="text" name="availability" value={this.state.newBook.availability} onChange={this.handleChange} />
+          <input type="text" name="status" value={this.state.newBook.status} onChange={this.handleChange} />
           </label>
           {/* <label className={"statusDropdown"}>
             Availability:
