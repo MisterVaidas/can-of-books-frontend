@@ -73,17 +73,6 @@ class BestBooks extends React.Component {
             Availability:
           <input type="text" name="status" value={this.state.newBook.status} onChange={this.handleChange} />
           </label>
-          {/* <label className={"statusDropdown"}>
-            Availability:
-          <select value={this.state.newBook.status} onChange={this.handleChange}>
-            <option value="status[]">Reprinting</option>
-            <option value="In Stock">In Stock</option>
-            <option value="Bestseller">Bestseller</option>
-            <option value="Available in e-book format">Available in e-book format</option>
-            <option value="Pre-order">Pre-order</option>
-            <option value="Releasing next month">Releasing next month</option>]
-          </select>
-          </label> */}
           <label>
             Cover Image Link:
             <input type="text" name="coverImageUrl" value={this.state.newBook.coverImageUrl} onChange={this.handleChange} />
