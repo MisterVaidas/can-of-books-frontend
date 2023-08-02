@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import "./App.css";
->>>>>>> 647d95ac35a53ebbeaed23afda2e75e8e5a9a946
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
