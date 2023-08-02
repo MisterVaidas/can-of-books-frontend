@@ -26,13 +26,14 @@ class BestBooks extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch("http://localhost:3001/books", {
+    fetch("http://localhost:3000/books", {
       method: "both",
       headers: {
         "content-Type": "application/json",
       },
       body: JSON.stringify(this.state.newBook),
     })
+    
     .then(response => response.json())
     .then(data => {
       this.setState({books: [...this.state.books, data]});
@@ -49,6 +50,7 @@ class BestBooks extends React.Component {
     .catch(error => console.error("Error", error))
   }
 
+  
   render() {
 
     return (
@@ -67,6 +69,21 @@ class BestBooks extends React.Component {
             Description:
           <input type="text" name="description" value={this.state.newBook.description} onChange={this.handleChange} />
           </label>
+          <label>
+            Description:
+          <input type="text" name="availability" value={this.state.newBook.availability} onChange={this.handleChange} />
+          </label>
+          {/* <label className={"statusDropdown"}>
+            Availability:
+          <select value={this.state.newBook.status} onChange={this.handleChange}>
+            <option value="status[]">Reprinting</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Bestseller">Bestseller</option>
+            <option value="Available in e-book format">Available in e-book format</option>
+            <option value="Pre-order">Pre-order</option>
+            <option value="Releasing next month">Releasing next month</option>]
+          </select>
+          </label> */}
           <label>
             Cover Image Link:
             <input type="text" name="coverImageUrl" value={this.state.newBook.coverImageUrl} onChange={this.handleChange} />
