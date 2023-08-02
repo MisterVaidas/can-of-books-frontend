@@ -31,6 +31,7 @@ class BestBooks extends React.Component {
               <img src={book.coverImageUrl} alt={book.title} className="book-cover"></img>
               <h2 className="book-title">{book.title}</h2>
               <p className="book-author">{book.author}</p>
+              <p className="book-description">{book.description}</p>
             </div>
             ))}
           </Carousel>
