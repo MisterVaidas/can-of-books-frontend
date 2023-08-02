@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./BestBooks.css";
+import BookFormModal from './BookFormModal';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -18,22 +19,25 @@ class BestBooks extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.updateNewBook = this.updateNewBook.bind(this)
+  }
+
+  updateNewBook(newBook) {
+    this.setState({ newBook });
   }
 
   handleChange(event) {
     this.setState({newBook: {...this.state.newBook, [event.target.name]: event.target.value}});
   } 
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(newBookData) {
     fetch("http://localhost:3001/books", {
-      method: "POST", // Changed 'both' to 'POST'
+      method: "POST",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state.newBook),
+      body: JSON.stringify(newBookData),
     })
-    
     .then(response => response.json())
     .then(data => {
       this.setState({books: [...this.state.books, data]});
@@ -43,6 +47,8 @@ class BestBooks extends React.Component {
       console.error("Error:", error);
     });
   }
+  
+  
   componentDidMount() {
     fetch("http://localhost:3001/books")
     .then(response => response.json())
@@ -50,46 +56,25 @@ class BestBooks extends React.Component {
     .catch(error => console.error("Error", error))
   }
 
+  updateBook = (event) => {
+    this.setState({
+      newBook: { ...this.state.newBook, [event.target.name]: event.target.value },
+    });
+  };
+
   
   render() {
 
     return (
       <div className="best-books-container">
         <h2 className="title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Title:
-            <input type ="text" name="title" value={this.state.newBook.title} onChange={this.handleChange} />
-          </label>
-          <label>
-            Author:
-            <input type="text" name="author" value={this.state.newBook.author} onChange={this.handleChange} />
-          </label>
-          <label>
-            Description:
-          <input type="text" name="description" value={this.state.newBook.description} onChange={this.handleChange} />
-          </label>
-          <label>
-            Availability:
-          <input type="text" name="status" value={this.state.newBook.status} onChange={this.handleChange} />
-          </label>
-          {/* <label className={"statusDropdown"}>
-            Availability:
-          <select value={this.state.newBook.status} onChange={this.handleChange}>
-            <option value="status[]">Reprinting</option>
-            <option value="In Stock">In Stock</option>
-            <option value="Bestseller">Bestseller</option>
-            <option value="Available in e-book format">Available in e-book format</option>
-            <option value="Pre-order">Pre-order</option>
-            <option value="Releasing next month">Releasing next month</option>]
-          </select>
-          </label> */}
-          <label>
-            Cover Image Link:
-            <input type="text" name="coverImageUrl" value={this.state.newBook.coverImageUrl} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-          </form>
+        <BookFormModal 
+          newBook={this.state.newBook}
+          updateBook={this.updateBook}
+          handleSubmit={this.handleSubmit}
+        />
+
+        
           
         {this.state.books.length > 0 ? (
           <Carousel className="book-carousel">
