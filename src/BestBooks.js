@@ -27,7 +27,7 @@ class BestBooks extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     fetch("http://localhost:3001/books", {
-      method: "both",
+      method: "POST", // Changed 'both' to 'POST'
       headers: {
         "content-Type": "application/json",
       },
