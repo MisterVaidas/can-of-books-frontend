@@ -68,6 +68,7 @@ class BestBooks extends React.Component {
     return (
       <div className="best-books-container">
         <h2 className="title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
+<<<<<<< HEAD
         <BookFormModal 
           newBook={this.state.newBook}
           updateBook={this.updateBook}
@@ -75,6 +76,31 @@ class BestBooks extends React.Component {
         />
 
         
+=======
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Title:
+            <input type ="text" name="title" value={this.state.newBook.title} onChange={this.handleChange} />
+          </label>
+          <label>
+            Author:
+            <input type="text" name="author" value={this.state.newBook.author} onChange={this.handleChange} />
+          </label>
+          <label>
+            Description:
+          <input type="text" name="description" value={this.state.newBook.description} onChange={this.handleChange} />
+          </label>
+          <label>
+            Availability:
+          <input type="text" name="status" value={this.state.newBook.status} onChange={this.handleChange} />
+          </label>
+          <label>
+            Cover Image Link:
+            <input type="text" name="coverImageUrl" value={this.state.newBook.coverImageUrl} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+          </form>
+>>>>>>> c1b1423ec6bff184d96366557d7c239d90442cb5
           
         {this.state.books.length > 0 ? (
           <Carousel className="book-carousel">
