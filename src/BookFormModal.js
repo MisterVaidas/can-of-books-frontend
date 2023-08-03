@@ -1,15 +1,24 @@
 import React from 'react';
 import Modal from 'react-modal';
+import './modal.css';
 
 class BookFormModal extends React.Component {
     constructor() {
-      super();
-      this.state = { showModal: false };
-      this.handleOpenModal = this.handleOpenModal.bind(this);
-      this.handleCloseModal = this.handleCloseModal.bind(this);
-      this.handleChange = this.handleChange.bind(this); 
-    this.handleSubmit = this.handleSubmit.bind(this); 
-    }
+        super();
+        this.state = { 
+          showModal: false,
+          title: "",
+          author: "",
+          description: "",
+          status: "",
+          coverImageUrl: ""
+        };
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+      
 
   handleOpenModal () {
     this.setState({ showModal: true });
@@ -52,36 +61,38 @@ class BookFormModal extends React.Component {
   
   render () {
     return (
-      <div>
-        <button onClick={this.handleOpenModal}>Add Book</button>
+      <div className="modal-container">
+        <button className="open-modal-button" onClick={this.handleOpenModal}>Add Book</button>
         <Modal 
            isOpen={this.state.showModal}
            contentLabel="Add Book"
            onRequestClose={this.handleCloseModal}
+           shouldCloseOnOverlayClick={false}
+           className="book-modal"
         >
-          <form onSubmit={this.handleSubmit}>
-            <label>
+          <form className="modal-form" onSubmit={this.handleSubmit}>
+            <label className="modal-form-label">
               Title:
-              <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required />
+              <input type="text" name="title" className="modal-form-input" value={this.state.title} onChange={this.handleChange} required />
             </label>
-            <label>
+            <label className="modal-form-label">
               Author:
-              <input type="text" name="author" value={this.state.author} onChange={this.handleChange} required />
+              <input type="text" name="author" className="modal-form-input" value={this.state.author} onChange={this.handleChange} required />
             </label>
-            <label>
+            <label className="modal-form-label">
               Description:
-              <textarea name="description" value={this.state.description} onChange={this.handleChange} required />
+              <textarea name="description" className="modal-form-textarea" value={this.state.description} onChange={this.handleChange} required />
             </label>
-            <label>
+            <label className="modal-form-label">
               Status:
-              <input type="text" name="status" value={this.state.status} onChange={this.handleChange} required />
+              <input type="text" name="status" className="modal-form-input" value={this.state.status} onChange={this.handleChange} required />
             </label>
-            <label>
+            <label className="modal-form-label">
               Cover Image URL:
-              <input type="text" name="coverImageUrl" value={this.state.coverImageUrl} onChange={this.handleChange} required />
+              <input type="text" name="coverImageUrl" className="modal-form-input" value={this.state.coverImageUrl} onChange={this.handleChange} required />
             </label>
-            <button type="submit">Submit</button>
-            <button onClick={this.handleCloseModal}>Close</button>
+            <button type="submit" className="modal-form-submit">Submit</button>
+            <button onClick={this.handleCloseModal} className="modal-close-button">Close</button>
           </form>
         </Modal>
       </div>

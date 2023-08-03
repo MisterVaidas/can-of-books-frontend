@@ -12,8 +12,14 @@ import {
   Link
 } from "react-router-dom";
 import { Nav } from 'react-bootstrap';
+import Modal from 'react-modal';
 
 class App extends React.Component {
+
+  componentDidMount() {
+    Modal.setAppElement('#root');
+  }
+  
   render() {
     return (
       <>
