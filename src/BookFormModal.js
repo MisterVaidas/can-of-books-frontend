@@ -98,6 +98,6 @@ class BookFormModal extends React.Component {
       </div>
     );
   }
-}
+};
 
 export default BookFormModal;
