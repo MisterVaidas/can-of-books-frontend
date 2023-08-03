@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./BestBooks.css";
 import BookFormModal from './BookFormModal';
+import ConfirmModal from './ConfirmModal';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -16,11 +17,15 @@ class BestBooks extends React.Component {
         status: [],
         coverImageUrl: "",
       },
+      toBeDeleted: null,
+      showConfirm: false,
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateNewBook = this.updateNewBook.bind(this)
+    this.deleteBook = this.deleteBook.bind(this)
   }
+  
 
   updateNewBook(newBook) {
     this.setState({ newBook });
@@ -62,46 +67,50 @@ class BestBooks extends React.Component {
     });
   };
 
+  deleteBook = (bookId) => {
+    fetch(`http://localhost:3001/books/${bookId}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(() => {
+        this.setState(prevState => ({
+            books: prevState.books.filter(book => book._id !== bookId)
+        }));
+        this.setState({
+          toBeDeleted: null,
+          showConfirm: false
+        });
+    })
+    .catch(error => console.error('Error:', error));
+};
+
+confirmDelete = (bookId) => {
+  this.setState({
+    toBeDeleted: bookId,
+    showConfirm: true
+  });
+};
+
+
   
   render() {
 
     return (
       <div className="best-books-container">
         <h2 className="title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
-<<<<<<< HEAD
         <BookFormModal 
           newBook={this.state.newBook}
           updateBook={this.updateBook}
           handleSubmit={this.handleSubmit}
         />
 
-        
-=======
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Title:
-            <input type ="text" name="title" value={this.state.newBook.title} onChange={this.handleChange} />
-          </label>
-          <label>
-            Author:
-            <input type="text" name="author" value={this.state.newBook.author} onChange={this.handleChange} />
-          </label>
-          <label>
-            Description:
-          <input type="text" name="description" value={this.state.newBook.description} onChange={this.handleChange} />
-          </label>
-          <label>
-            Availability:
-          <input type="text" name="status" value={this.state.newBook.status} onChange={this.handleChange} />
-          </label>
-          <label>
-            Cover Image Link:
-            <input type="text" name="coverImageUrl" value={this.state.newBook.coverImageUrl} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-          </form>
->>>>>>> c1b1423ec6bff184d96366557d7c239d90442cb5
-          
+<ConfirmModal 
+  show={this.state.showConfirm} 
+  onConfirm={() => this.deleteBook(this.state.toBeDeleted)} 
+  onCancel={() => this.setState({ showConfirm: false, toBeDeleted: null })}
+/>
+
+ 
         {this.state.books.length > 0 ? (
           <Carousel className="book-carousel">
             {this.state.books.map((book, index) => (
@@ -110,6 +119,7 @@ class BestBooks extends React.Component {
               <h2 className="book-title">{book.title}</h2>
               <p className="book-author">{book.author}</p>
               <p className="book-description">{book.description}</p>
+              <button onClick={() => this.confirmDelete(book._id)}>Delete</button>
             </div>
             ))}
           </Carousel>
@@ -120,6 +130,6 @@ class BestBooks extends React.Component {
       </div>
     )
   }
-}
+};
 
 export default BestBooks;
